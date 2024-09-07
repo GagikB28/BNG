@@ -92,19 +92,41 @@
 
       console.log(JSON.parse(localStorage.getItem('score')));
 
+        function pickCompMove(){
+          const randNum = Math.random();
+          let compMove= '';
+          if(randNum >= 0 && randNum < 1/3){
+          compMove = 'rock';
+          } else if(randNum >= 1/3 && randNum < 2/3){
+          compMove = 'paper';
+          } else {
+          compMove = 'scissors';
+          }
+
+          return compMove;
+        }
         function result(choice){
-          let compMove = '';
+          const compMove = pickCompMove()
           let result = '';
 
-        if(choice === 'rock'){
+        if(compMove === 'rock' && choice === 'rock'){
+          result = 'Tie.';
+        } else if(compMove === 'rock' && choice === 'paper'){
+          result = 'You win.'; 
+        } else if(compMove === 'rock' && choice === 'scissors'){
           result = 'You lose.';
-          compMove = 'paper';
-        } else if(choice === 'paper'){
+        } else if(compMove === 'paper' && choice === 'rock'){
           result = 'You lose.'; 
-          compMove = 'scissors';
-        } else if(choice === 'scissors'){
-          result = 'You lose.';
-          compMove = 'rock'; 
+        } else if(compMove === 'paper' && choice === 'paper'){
+          result = 'Tie.'; 
+        } else if(compMove === 'paper' && choice === 'scissors'){
+          result = 'You win.'; 
+        } else if(compMove === 'scissors' && choice === 'rock'){
+          result = 'You win.'; 
+        } else if(compMove === 'scissors' && choice === 'paper'){
+          result = 'You lose.'; 
+        } else if(compMove === 'scissors' && choice === 'scissors'){
+          result = 'Tie.';
         }
 
         if (result === 'You win.'){
@@ -125,9 +147,9 @@
         `you 
         <img src="images/${choice}-emoji.png" class="move-icon"> 
         <img src="images/${compMove}-emoji.png" class="move-icon">
-        Gagik`;
+        computer`;
         
-        console.log(`You picked ${choice}. Gagik picked ${compMove}. ${result}\n Wins: ${score.wins}, Loses: ${score.losses}, Ties: ${score.ties}`)
+        alert(`You picked ${choice}. Computer picked ${compMove}. ${result}\n Wins: ${score.wins}, Loses: ${score.losses}, Ties: ${score.ties}`)
         };
 
         function updateScore() {
